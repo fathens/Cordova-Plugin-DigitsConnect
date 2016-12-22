@@ -1,6 +1,6 @@
 /src/main/AndroidManifest.xml
 /*.properties
-/*.gradle
+/build.gradle
 /build/
 /gradle*
 *.iml
