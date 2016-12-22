@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="org.fathens.cordova.plugin.digitsconnect" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>DigitsConnect</name>
+    <description>Cordova Plugin for Digits Connection</description>
+    <license>MIT</license>
+
+    <engines>
+        <engine name="cordova-android" version=">=4.1.0" />
+        <engine name="cordova-ios" version=">=3.9.0" />
+    </engines>
+
+    <js-module name="DigitsConnectPlugin" src="www/digitsconnect.js">
+        <clobbers target="plugin.DigitsConnect"/>
+    </js-module>
+
+    <platform name="android">
+        <dependency id="org.fathens.cordova.plugin.fabric.Crashlytics" url="https://github.com/fathens/Cordova-Plugin-Crashlytics.git" commit="master" />
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+
+        <source-file src="platforms/android/src/main/kotlin/DigitsConnect.kt" target-dir="kotlin/org.fathens.cordova.plugin.digitsconnect"/>
+
+        <framework src="platforms/android/plugin.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <dependency id="org.fathens.cordova.plugin.fabric.Crashlytics" url="https://github.com/fathens/Cordova-Plugin-Crashlytics.git" commit="master" />
+
+        <source-file src="platforms/ios/src/DigitsConnect.swift"/>
+
+        <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
+    </platform>
+</plugin>
