@@ -21,7 +21,7 @@ source 'https://rubygems.org'
 
 gem "fetch_local_lib", :git => "https://github.com/fathens/fetch_local_lib.git"
 gem "cordova_plugin_kotlin", :git => "https://github.com/fathens/Cordova-Plugin-Kotlin.git"
-gem "cordova_plugin_fabric", :git => "https://github.com/fathens/Cordova-Plugin-Crashlytics.git"
+gem "cordova_plugin_fabric", :git => "https://github.com/fathens/Cordova-Plugin-Fabric.git"
 EOF
 
 bundle install && bundle update
