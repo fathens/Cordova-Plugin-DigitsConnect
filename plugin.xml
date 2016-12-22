@@ -13,8 +13,18 @@
         <clobbers target="plugin.DigitsConnect"/>
     </js-module>
 
+    <preference name="TWITTER_KEY" />
+    <preference name="TWITTER_SECRET" />
+
+    <dependency id="org.fathens.cordova.plugin.Fabric" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
+
     <platform name="android">
-        <dependency id="org.fathens.cordova.plugin.fabric.Crashlytics" url="https://github.com/fathens/Cordova-Plugin-Crashlytics.git" commit="master" />
+        <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <meta-data android:name="io.fabric.twitter.key" android:value="$TWITTER_KEY"/>
+            <meta-data android:name="io.fabric.twitter.secret" android:value="$TWITTER_SECRET"/>
+        </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET" />
@@ -22,11 +32,16 @@
 
         <source-file src="platforms/android/src/main/kotlin/DigitsConnect.kt" target-dir="kotlin/org.fathens.cordova.plugin.digitsconnect"/>
 
+        <fabric>
+            <instance>new com.twitter.sdk.android.core.TwitterCore(new com.twitter.sdk.android.core.TwitterAuthConfig(getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.key"), getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.secret")))</instance>
+            <instance>new com.digits.sdk.android.Digits.Builder().build()</instance>
+        </fabric>
+
         <framework src="platforms/android/plugin.gradle" custom="true" type="gradleReference"/>
     </platform>
 
     <platform name="ios">
-        <dependency id="org.fathens.cordova.plugin.fabric.Crashlytics" url="https://github.com/fathens/Cordova-Plugin-Crashlytics.git" commit="master" />
+        <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
 
         <source-file src="platforms/ios/src/DigitsConnect.swift"/>
 
