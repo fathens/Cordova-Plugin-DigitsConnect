@@ -1,0 +1,8 @@
+/src/main/AndroidManifest.xml
+/*.properties
+/*.gradle
+/build/
+/gradle*
+*.iml
+/Gemfile
+/*.lock
