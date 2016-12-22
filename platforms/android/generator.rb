@@ -21,6 +21,7 @@ source 'https://rubygems.org'
 
 gem "fetch_local_lib", :git => "https://github.com/fathens/fetch_local_lib.git"
 gem "cordova_plugin_kotlin", :git => "https://github.com/fathens/Cordova-Plugin-Kotlin.git"
+gem "cordova_plugin_fabric", :git => "https://github.com/fathens/Cordova-Plugin-Crashlytics.git"
 EOF
 
 bundle install && bundle update
@@ -28,11 +29,14 @@ bundle install && bundle update
 cat > .generator.rb <<EOF
 require 'pathname'
 require 'cordova_plugin_kotlin'
+require 'cordova_plugin_fabric'
 
 PLATFORM_DIR = Pathname('$0').realpath.dirname
 PLUGIN_DIR = PLATFORM_DIR.dirname.dirname
 
-write_build_gradle(PLATFORM_DIR/'build.gradle')
+build_gradle = PLATFORM_DIR/'build.gradle'
+write_build_gradle build_gradle
+modify_gradle build_gradle, ENV['FABRIC_API_KEY'], ENV['FABRIC_BUILD_SECRET']
 
 log "Generating project done"
 log "Open by AndroidStudio. Thank you."
