@@ -3,7 +3,7 @@
 cat > src/main/AndroidManifest.xml <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.fathens.cordova.plugin.digitsconnect" >
+    package="org.fathens.cordova.plugin.fabric" >
     <uses-sdk android:minSdkVersion="19" />
     <application>
         <activity android:name=".MainActivity" >

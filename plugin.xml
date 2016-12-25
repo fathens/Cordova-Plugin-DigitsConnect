@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="org.fathens.cordova.plugin.digitsconnect" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="org.fathens.cordova.plugin.fabric.digits" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>DigitsConnect</name>
-    <description>Cordova Plugin for Digits Connection</description>
+    <description>Cordova Plugin for Fabric Digits</description>
     <license>MIT</license>
 
     <engines>
@@ -9,8 +9,8 @@
         <engine name="cordova-ios" version=">=3.9.0" />
     </engines>
 
-    <js-module name="DigitsConnectPlugin" src="www/digitsconnect.js">
-        <clobbers target="plugin.DigitsConnect"/>
+    <js-module name="FabricDigitsPlugin" src="www/digits.js">
+        <clobbers target="plugin.Fabric.Digits"/>
     </js-module>
 
     <preference name="TWITTER_KEY" />
@@ -30,7 +30,13 @@
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
 
-        <source-file src="platforms/android/src/main/kotlin/DigitsConnect.kt" target-dir="kotlin/org.fathens.cordova.plugin.digitsconnect"/>
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="FabricDigitsPlugin">
+                <param name="android-package" value="org.fathens.cordova.plugin.fabric.Digits"/>
+            </feature>
+        </config-file>
+
+        <source-file src="platforms/android/src/main/kotlin/Digits.kt" target-dir="kotlin/org.fathens.cordova.plugin.fabric"/>
 
         <fabric>
             <instance>new com.twitter.sdk.android.core.TwitterCore(new com.twitter.sdk.android.core.TwitterAuthConfig(getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.key"), getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.secret")))</instance>
@@ -43,7 +49,7 @@
     <platform name="ios">
         <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
 
-        <source-file src="platforms/ios/src/DigitsConnect.swift"/>
+        <source-file src="platforms/ios/src/Digits.swift"/>
 
         <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
     </platform>
