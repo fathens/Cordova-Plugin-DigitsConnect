@@ -1,5 +1,5 @@
 dependencies {
-    compile('com.digits.sdk.android:digits:2.0.3@aar') {
-        transitive = true;
+    compile('com.digits.sdk.android:digits:2.0.4@aar') {
+      transitive = true;
     }
 }
