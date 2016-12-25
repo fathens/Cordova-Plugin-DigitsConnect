@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="org.fathens.cordova.plugin.fabric.digits" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>DigitsConnect</name>
+    <description>Cordova Plugin for Fabric Digits</description>
+    <license>MIT</license>
+
+    <engines>
+        <engine name="cordova-android" version=">=4.1.0" />
+        <engine name="cordova-ios" version=">=3.9.0" />
+    </engines>
+
+    <js-module name="FabricDigitsPlugin" src="www/digits.js">
+        <clobbers target="plugin.Fabric.Digits"/>
+    </js-module>
+
+    <preference name="TWITTER_KEY" />
+    <preference name="TWITTER_SECRET" />
+
+    <dependency id="org.fathens.cordova.plugin.Fabric" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
+
+    <platform name="android">
+        <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <meta-data android:name="io.fabric.twitter.key" android:value="$TWITTER_KEY"/>
+            <meta-data android:name="io.fabric.twitter.secret" android:value="$TWITTER_SECRET"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+        </config-file>
+
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="FabricDigitsPlugin">
+                <param name="android-package" value="org.fathens.cordova.plugin.fabric.Digits"/>
+            </feature>
+        </config-file>
+
+        <source-file src="platforms/android/src/main/kotlin/Digits.kt" target-dir="kotlin/org.fathens.cordova.plugin.fabric"/>
+
+        <fabric>
+            <instance>new com.twitter.sdk.android.core.TwitterCore(new com.twitter.sdk.android.core.TwitterAuthConfig(getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.key"), getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.secret")))</instance>
+            <instance>new com.digits.sdk.android.Digits.Builder().build()</instance>
+        </fabric>
+
+        <framework src="platforms/android/plugin.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+    <platform name="ios">
+        <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
+
+        <source-file src="platforms/ios/src/Digits.swift"/>
+
+        <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
+    </platform>
+</plugin>
