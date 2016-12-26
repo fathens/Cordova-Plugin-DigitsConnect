@@ -19,8 +19,6 @@
     <dependency id="org.fathens.cordova.plugin.fabric.Base" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
 
     <platform name="android">
-        <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
-
         <config-file target="AndroidManifest.xml" parent="application">
             <meta-data android:name="io.fabric.twitter.key" android:value="$TWITTER_KEY"/>
             <meta-data android:name="io.fabric.twitter.secret" android:value="$TWITTER_SECRET"/>
@@ -49,8 +47,6 @@
     </platform>
 
     <platform name="ios">
-        <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
-
         <source-file src="platforms/ios/src/FabricDigits.swift"/>
 
         <config-file parent="/*" target="config.xml">
