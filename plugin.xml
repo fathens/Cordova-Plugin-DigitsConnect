@@ -39,8 +39,12 @@
         <source-file src="platforms/android/src/main/kotlin/FabricDigits.kt" target-dir="kotlin/org.fathens.cordova.plugin.fabric"/>
 
         <fabric>
-            <instance>new com.twitter.sdk.android.core.TwitterCore(new com.twitter.sdk.android.core.TwitterAuthConfig(getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.key"), getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.secret")))</instance>
-            <instance>new com.digits.sdk.android.Digits.Builder().build()</instance>
+            <import>com.twitter.sdk.android.core.TwitterCore</import>
+            <import>com.twitter.sdk.android.core.TwitterAuthConfig</import>
+            <import>android.content.pm.PackageManager.GET_META_DATA</import>
+            <import>com.digits.sdk.android.Digits</import>
+            <instance>TwitterCore(TwitterAuthConfig(metaData.getString("io.fabric.twitter.key"), metaData.getString("io.fabric.twitter.secret")))</instance>
+            <instance>Digits.Builder().build()</instance>
         </fabric>
 
         <framework src="platforms/android/plugin.gradle" custom="true" type="gradleReference"/>
@@ -59,5 +63,11 @@
             <pod name="Digits" />
         </podfile>
 
+        <fabric name="Digits">
+            <info key="consumerKey" type="string">${TWITTER_KEY}</info>
+            <info key="consumerSecret" type="string">${TWITTER_SECRET}</info>
+            <import>DigitsKit</import>
+            <instance>Digits.self</instance>
+        </fabric>
     </platform>
 </plugin>
