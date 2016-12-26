@@ -16,7 +16,7 @@
     <preference name="TWITTER_KEY" />
     <preference name="TWITTER_SECRET" />
 
-    <dependency id="org.fathens.cordova.plugin.Fabric" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
+    <dependency id="org.fathens.cordova.plugin.fabric.Base" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
 
     <platform name="android">
         <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
