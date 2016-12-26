@@ -63,6 +63,5 @@
             <pod name="Digits" />
         </podfile>
 
-        <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
     </platform>
 </plugin>
