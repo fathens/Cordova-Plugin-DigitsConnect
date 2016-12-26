@@ -53,6 +53,16 @@
 
         <source-file src="platforms/ios/src/Digits.swift"/>
 
+        <config-file parent="/*" target="config.xml">
+            <feature name="FabricDigitsPlugin">
+                <param name="ios-package" value="FabricDigits"/>
+            </feature>
+        </config-file>
+
+        <podfile swift_version="3.0">
+            <pod name="Digits" />
+        </podfile>
+
         <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
     </platform>
 </plugin>
