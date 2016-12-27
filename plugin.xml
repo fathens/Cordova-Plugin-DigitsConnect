@@ -13,15 +13,15 @@
         <clobbers target="plugin.Fabric.Digits"/>
     </js-module>
 
-    <preference name="TWITTER_KEY" />
-    <preference name="TWITTER_SECRET" />
+    <preference name="FABRIC_TWITTER_KEY" />
+    <preference name="FABRIC_TWITTER_SECRET" />
 
     <dependency id="org.fathens.cordova.plugin.fabric.Base" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
 
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="application">
-            <meta-data android:name="io.fabric.twitter.key" android:value="$TWITTER_KEY"/>
-            <meta-data android:name="io.fabric.twitter.secret" android:value="$TWITTER_SECRET"/>
+            <meta-data android:name="io.fabric.twitter.key" android:value="$FABRIC_TWITTER_KEY"/>
+            <meta-data android:name="io.fabric.twitter.secret" android:value="$FABRIC_TWITTER_SECRET"/>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -64,8 +64,8 @@
         </podfile>
 
         <fabric name="Digits">
-            <info key="consumerKey" type="string">${TWITTER_KEY}</info>
-            <info key="consumerSecret" type="string">${TWITTER_SECRET}</info>
+            <info key="consumerKey" type="string">${FABRIC_TWITTER_KEY}</info>
+            <info key="consumerSecret" type="string">${FABRIC_TWITTER_SECRET}</info>
             <import>DigitsKit</import>
             <instance>Digits.self</instance>
         </fabric>
