@@ -6,7 +6,7 @@ import com.digits.sdk.android.*
 
 class FabricDigits : CordovaPlugin(), SessionListener {
 
-    private class PluginContext(val holder: DigitsPlugin, val action: String, val callback: CallbackContext) {
+    private class PluginContext(val holder: FabricDigits, val action: String, val callback: CallbackContext) {
         fun error(msg: String?) = callback.error(msg)
         fun success() = callback.success(null as? String)
         fun success(msg: String?) = callback.success(msg)
