@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="org.fathens.cordova.plugin.fabric.digits" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="org.fathens.cordova.plugin.fabric.Digits" version="0.1.0" xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>DigitsConnect</name>
     <description>Cordova Plugin for Fabric Digits</description>
     <license>MIT</license>
@@ -16,11 +16,9 @@
     <preference name="TWITTER_KEY" />
     <preference name="TWITTER_SECRET" />
 
-    <dependency id="org.fathens.cordova.plugin.Fabric" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
+    <dependency id="org.fathens.cordova.plugin.fabric.Base" url="https://github.com/fathens/Cordova-Plugin-Fabric.git" commit="master" />
 
     <platform name="android">
-        <dependency id="org.fathens.cordova.plugin.lang.Kotlin" url="https://github.com/fathens/Cordova-Plugin-Kotlin.git" commit="master" />
-
         <config-file target="AndroidManifest.xml" parent="application">
             <meta-data android:name="io.fabric.twitter.key" android:value="$TWITTER_KEY"/>
             <meta-data android:name="io.fabric.twitter.secret" android:value="$TWITTER_SECRET"/>
@@ -34,25 +32,42 @@
 
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="FabricDigitsPlugin">
-                <param name="android-package" value="org.fathens.cordova.plugin.fabric.Digits"/>
+                <param name="android-package" value="org.fathens.cordova.plugin.fabric.FabricDigits"/>
             </feature>
         </config-file>
 
-        <source-file src="platforms/android/src/main/kotlin/Digits.kt" target-dir="kotlin/org.fathens.cordova.plugin.fabric"/>
+        <source-file src="platforms/android/src/main/kotlin/FabricDigits.kt" target-dir="kotlin/org.fathens.cordova.plugin.fabric"/>
 
         <fabric>
-            <instance>new com.twitter.sdk.android.core.TwitterCore(new com.twitter.sdk.android.core.TwitterAuthConfig(getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.key"), getPackageManager().getApplicationInfo(getPackageName(), android.content.pm.PackageManager.GET_META_DATA).metaData.getString("io.fabric.twitter.secret")))</instance>
-            <instance>new com.digits.sdk.android.Digits.Builder().build()</instance>
+            <import>com.twitter.sdk.android.core.TwitterCore</import>
+            <import>com.twitter.sdk.android.core.TwitterAuthConfig</import>
+            <import>android.content.pm.PackageManager.GET_META_DATA</import>
+            <import>com.digits.sdk.android.Digits</import>
+            <instance>TwitterCore(TwitterAuthConfig(metaData.getString("io.fabric.twitter.key"), metaData.getString("io.fabric.twitter.secret")))</instance>
+            <instance>Digits.Builder().build()</instance>
         </fabric>
 
         <framework src="platforms/android/plugin.gradle" custom="true" type="gradleReference"/>
     </platform>
 
     <platform name="ios">
-        <dependency id="org.fathens.cordova.plugin.lang.Swift" url="https://github.com/fathens/Cordova-Plugin-Swift.git" commit="master" />
+        <source-file src="platforms/ios/src/FabricDigits.swift"/>
 
-        <source-file src="platforms/ios/src/Digits.swift"/>
+        <config-file parent="/*" target="config.xml">
+            <feature name="FabricDigitsPlugin">
+                <param name="ios-package" value="FabricDigits"/>
+            </feature>
+        </config-file>
 
-        <hook type="after_plugin_install" src="platforms/ios/hooks/after_plugin_install.rb"/>
+        <podfile swift_version="3.0">
+            <pod name="Digits" />
+        </podfile>
+
+        <fabric name="Digits">
+            <info key="consumerKey" type="string">${TWITTER_KEY}</info>
+            <info key="consumerSecret" type="string">${TWITTER_SECRET}</info>
+            <import>DigitsKit</import>
+            <instance>Digits.self</instance>
+        </fabric>
     </platform>
 </plugin>

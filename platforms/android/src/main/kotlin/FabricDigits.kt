@@ -4,7 +4,7 @@ import org.apache.cordova.*
 import org.json.*
 import com.digits.sdk.android.*
 
-class DigitsPlugin : CordovaPlugin(), SessionListener {
+class FabricDigits : CordovaPlugin(), SessionListener {
 
     private class PluginContext(val holder: DigitsPlugin, val action: String, val callback: CallbackContext) {
         fun error(msg: String?) = callback.error(msg)
