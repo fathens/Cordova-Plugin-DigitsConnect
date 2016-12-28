@@ -3,7 +3,7 @@ import Cordova
 import Fabric
 import DigitsKit
 
-func log(_ msg: String) {
+fileprivate func log(_ msg: String) {
     print(msg)
 }
 
